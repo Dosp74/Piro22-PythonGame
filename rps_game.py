@@ -62,6 +62,7 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         name=i.name
         rps_players_name.append(name)
     
+    current_player_name=current_player.name
    
 
     if not is_friend:
@@ -115,7 +116,7 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
             rps_final=rps_right
 
         t.sleep(1)
-        print(f"{current_player}는 {rps_final}를 냈어요.")
+        print(f"{current_player_name}는 {rps_final}를 냈어요.")
         rps_enemy_final=r.choice([rps_enemy_left, rps_enemy_right])
         print(f"{rps_enemy}는 {rps_enemy_final}를 냈어요.")
 
@@ -125,15 +126,15 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         t.sleep(1)
         if rps_final==rps_enemy_final:
             print("무승부입니다! 둘다 반잔씩 마시세요.🍺")  
-            return 0.5   
+            return [ current_player ,rps_enemy]
 
         elif (rps_final,rps_enemy_final) in rps_player_win:
-            print(f"{current_player} wins~")
+            print(f"{current_player_name} wins~")
             print(f"{rps_enemy}한잔하세요~")
-            return 0
+            return rps_enemy
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
             print(f"{rps_enemy} wins~")
-            print(f"{current_player}한잔하세요~")
+            print(f"{current_player_name}한잔하세요~")
             return 1
         
 
@@ -161,7 +162,7 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
 
 
         t.sleep(1)
-        print(f"{current_player}는 {rps_final}를 냈어요.")
+        print(f"{current_player_name}는 {rps_final}를 냈어요.")
         rps_enemy_final=r.choice([rps_enemy_left, rps_enemy_right])
         print(f"{rps_enemy}는 {rps_enemy_final}를 냈어요.")
 
@@ -171,13 +172,14 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         t.sleep(1)
         if rps_final==rps_enemy_final:
             print("무승부입니다! 둘다 반잔씩 마시세요.🍺")  
-            return 0.5   
+            return [current_player ,rps_enemy]
 
         elif (rps_final,rps_enemy_final) in rps_player_win:
-            print(f"{current_player} wins~")
- 
-            return 0
+            print(f"{current_player_name} wins~")
+            print(f"{rps_enemy}한잔하세요~")
+            return rps_enemy
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
             print(f"{rps_enemy} wins~")
-            print(f"{current_player}한잔하세요~")
+            print(f"{current_player_name}한잔하세요~")
             return 1
+        

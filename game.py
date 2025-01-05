@@ -130,9 +130,10 @@ def gamestart():
             choice = int(choice)
             if 1 <= choice <= len(games):
                 print(f"\n=== {games[choice-1]} 시작! ===")
+                drink_players = []  # 술을 마셔야 하는 플레이어들의 리스트
+                
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
-                    result = 0
                     if choice == 1:
                         result = number_game(all_players, p != player)
                     elif choice == 2:
@@ -146,6 +147,7 @@ def gamestart():
                     elif choice == 5:
                         result = game_like(p.name, all_players, p != player)
                     
+<<<<<<< HEAD
                     # 게임 결과 반영
 
                     is_dead = p.drink(result)
@@ -153,6 +155,29 @@ def gamestart():
                         print(f"\n{p.name}이(가) 치사량({p.tolerance}잔)에 도달했습니다!")
                         gameover()
                         return
+=======
+                    # 게임 결과에 따라 마실 사람 리스트에 추가
+                    if isinstance(result, list):  # 이미 리스트로 반환된 경우
+                        drink_players.extend(result)
+                    else:  # 숫자로 반환된 경우
+                        if result > 0:
+                            drink_players.append(p)
+                
+                # 게임 결과 반영
+                dead_players = []  # 치사량에 도달한 플레이어들
+                for p in drink_players:
+                    if p.drink(1):  # 1잔씩 마시기
+                        dead_players.append(p)
+                
+                if dead_players:  # 치사량 도달한 플레이어가 있다면
+                    if len(dead_players) == 1:
+                        print(f"\n💀 {dead_players[0].name}이(가) 치사량({dead_players[0].tolerance}잔)에 도달했습니다!")
+                    else:
+                        names = ", ".join(p.name for p in dead_players)
+                        print(f"\n💀 {names}이(가) 치사량에 도달했습니다!")
+                    gameover()
+                    return
+>>>>>>> fe90ab8be242a9b5af8831ad1bdfa3132ef11f3e
                 
                 max_drinks = max(p.drinks for p in all_players)
                 next_players = [p for p in all_players if p.drinks == max_drinks]
