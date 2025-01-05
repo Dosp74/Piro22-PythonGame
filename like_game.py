@@ -37,9 +37,30 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
     current_player = next(p for p in all_players if hasattr(p, 'name') and p.name == current_player_name)
     rejection_count = 0
 
-    # 고백 대상 선택 (자기 자신 제외, Player 객체만 선택)
+    # 현재 플레이어가 실제 플레이어인지 확인
+    is_real_player = current_player_name == real_player_name
+    
+    # 고백 대상 선택
     available_players = [p for p in all_players if hasattr(p, 'name') and p != current_player]
-    selected_player = random.choice(available_players)
+    
+    if is_real_player:  # 실제 플레이어의 차례
+        print("\n누구에게 고백하시겠습니까?")
+        for idx, p in enumerate(available_players, 1):
+            print(f"{idx}: {p.name}", end="  ")
+        print()
+        
+        while True:
+            try:
+                choice = int(input("선택: "))
+                if 1 <= choice <= len(available_players):
+                    selected_player = available_players[choice-1]
+                    break
+                else:
+                    print(f"1에서 {len(available_players)} 사이의 숫자를 입력하세요.")
+            except ValueError:
+                print("숫자를 입력하세요.")
+    else:  # AI 플레이어의 차례
+        selected_player = random.choice(available_players)
     
     print(f"\n{current_player.name}님의 차례입니다!")
     time.sleep(0.5)
