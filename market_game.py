@@ -44,7 +44,8 @@ def 시장에가면(name, players, is_human):
                     else:
                         time.sleep(1)
                         print("아~ 순서가 틀렸어요😂")
-                        return {player.name: 1}
+                        # return {player.name: 1}
+                        return 1
                 count += 1
             else:
                 is_human = True
