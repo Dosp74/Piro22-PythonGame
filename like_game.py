@@ -38,11 +38,15 @@ def game_like(current_name: str, players: list, is_ai: bool) -> list:
     if not is_ai:
         print("누가 좋아?")
         other_players = [p for p in players if p != current_player]
+        if not other_players:
+            print("Error: 선택할 수 있는 다른 플레이어가 없습니다.")
+            return []
+        
         for index, player in enumerate(other_players, 1):
             print(f"{index}: {player.name}", end="  ")
         while True:
             try:
-                choice = int(input())
+                choice = int(input("\n선택할 플레이어 번호를 입력하세요: "))
                 if 1 <= choice <= len(other_players):
                     selected_player = other_players[choice-1]
                     break
