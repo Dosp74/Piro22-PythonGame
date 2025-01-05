@@ -2,9 +2,9 @@
 import random
 import time
 
-name = input("당신의 이름을 입력하세요: ")
+# name = input("당신의 이름을 입력하세요: ")
 
-players = ["서정", "종서", "주영"] # 예시
+# players = ["서정", "종서", "주영"] # 예시
 
 def 시장에가면(players):
     itemList = ["사과", "고등어", "소주", "맥주", "문어", "갈치", "휴대폰", "TV", 
