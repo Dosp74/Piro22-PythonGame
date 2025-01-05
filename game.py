@@ -138,7 +138,8 @@ def gamestart():
                     if choice == 1:
                         result = 숫자맞추기(p != player)
                     elif choice == 2:
-                        result = 가위바위보하나빼기(p != player)
+                        result = 가위바위보하나빼기(p.name, friend_list,p != player)
+
                     elif choice == 3:
                         result = 시장에가면(p != player)
                     elif choice == 4:
