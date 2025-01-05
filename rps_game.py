@@ -1,67 +1,12 @@
-def 가위바위보하나빼기(current_player,available_names,is_friend=False):
+def 가위바위보하나빼기(current_player,available_names,is_friend):
     import time as t
     import random as r
-
-    print("가위바위보 하나 빼기 1을 선택했군요")
-    print("규칙을 설명해줄게요!")
-    t.sleep(2)
-    print("\n===================<🕹️  가위바위보 하나빼기 1 규칙>==================\n")
-    
-    t.sleep(1)
-    print("가위바위보 하나빼기 1은 양손으로 가위, 바위, 보 중에 하나를 내고 전략적으로 한 손을 빼는 가위바위보 게임이에요!")
-    
-    t.sleep(1)
-    print("먼저 대결할 한 명을 골라주세요~🤗")
-    
-    t.sleep(1)
-    print("그 다음에 '가위바위보!'를 외치고 동시에 모두 양손으로 가위, 바위, 보 중 하나를 내요~! ✋✊🖐")
-    
-    t.sleep(1)
-    print("이제, 하나빼기 1을 외치며 동시에 본인이 빼고 싶은 모양을 하나 선택해서 외칩니다!")
-    
-    t.sleep(1)
-    print("게임 결과는 빼고 남은 손모양으로 결정돼요!")
-    
-    t.sleep(2)
-    print("   예:")
-    
-    t.sleep(1)
-    print("     - A: 가위, 바위 (보를 뺀다고 선언)")
-    print("     - B: 바위, 보 (가위를 뺀다고 선언)")
-    print("     → 남은 모양은 A(가위) vs B(보), 결과는 A 승리! 🎉")
-    print("\n---\n")
-    t.sleep(1)
-    print("🎮 **승패 결정하기!**")
-    t.sleep(2)
-    print("- 가위, 바위, 보의 기본 규칙대로 승부를 결정합니다:")
-    
-    print("  - 가위 > 보")
-    print("  - 바위 > 가위")
-    print("  - 보 > 바위")
-    
-    t.sleep(2)
-    print("- 만약 남은 모양이 서로 같으면 무승부! 다음 판으로 넘어갑니다~ 😊")
-    print("\n---\n")
-    t.sleep(1)
-    print("🎮 **주의할 점!**")
-    t.sleep(1)
-    print("- 두 손의 모양이 같을 필요는 없어요! 예를 들어, 한 손은 가위, 다른 손은 보를 낼 수도 있답니다.")
-    t.sleep(1)
-    print("- 상대방이 어떤 모양을 빼고 싶어 할지 예측하는 게 승리의 포인트! 🕵️‍♀️")
-    t.sleep(1)
-    print("\n---\n")
-
-    t.sleep(2)
-    print("이제 다들 준비되셨죠?")
-    t.sleep(2)
-    print("**자, 가위바위보 하나빼기 1 시작해볼까요?! 🙌**")
-    t.sleep(1)
 
 
     rps_list = ["가위", "바위", "보"]
  
-    rps_players_name = available_names
-    rps_players_name.remove(f"{current_player}")
+    rps_players_name = available_names[:]
+    rps_players_name.remove(current_player)
 
     if not is_friend:
         rps_enemy=input( "본인 제외 한명을 지목하여 이름을 입력해주세요😱 ")
@@ -74,11 +19,12 @@ def 가위바위보하나빼기(current_player,available_names,is_friend=False):
             print("자리에 없는 사람이에요 다시 입력해주세요😱 ")
             t.sleep(1)
             rps_enemy=input( "다시 한명을 지목하여 이름을 입력해주세요~~😱 ")
-
+ 
         t.sleep(1)
         print("===================<🎮게임 시작!>===================")
 
-        t.sleep(1)
+        t.sleep(1) 
+     
         while True:
             t.sleep(1)
             try:
@@ -128,14 +74,14 @@ def 가위바위보하나빼기(current_player,available_names,is_friend=False):
         elif (rps_final,rps_enemy_final) in rps_player_win:
             print(f"{current_player} wins~")
             print(f"{rps_enemy}한잔하세요~")
-            return 1
+            return 0
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
             print(f"{rps_enemy} wins~")
             print(f"{current_player}한잔하세요~")
             return 1
         
 
-    if is_friend:
+    elif is_friend:
         rps_enemy=r.choice([available_names])
         print( f"당신의 상대는 {rps_enemy}😱 ")
 
