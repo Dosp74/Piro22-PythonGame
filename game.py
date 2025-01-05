@@ -77,7 +77,7 @@ def gamestart():
     all_players = [player] + opponents
     current_player = player
 
-    while True:
+    while True:  # 메인 게임 루프
         print("\n=== 현재 상태 ===")
         for p in all_players:
             print(f"{p.name}: {p.drinks}잔 / {p.tolerance}잔")
@@ -93,7 +93,7 @@ def gamestart():
             choice = input("게임 번호를 선택하세요: ")
             if choice == "exit":
                 gameover()
-                break
+                return  # 전체 게임 종료
         else:  # 다른 플레이어 차례
             time.sleep(1)
             print(f"\n{current_player.name}(이)가 고민중...")
@@ -106,6 +106,7 @@ def gamestart():
             if 1 <= choice <= len(games):
                 print(f"\n=== {games[choice-1]} 시작! ===")
                 drink_players = [] 
+                
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
                     if choice == 1:
@@ -127,14 +128,12 @@ def gamestart():
                         if result > 0:
                             drink_players.append(p)
                     
-                    # 마실 사람이 있으면 게임 종료하고 다음 플레이어로
-                    if drink_players:
+                    if drink_players:  # 마실 사람이 있으면 현재 게임만 종료
                         break
                 
                 # 게임 결과 반영 및 치사량 체크
                 dead_players = []
                 for p in drink_players:
-                    # 마시기 전에 치사량 체크
                     if p.drinks + 1 >= p.tolerance:
                         dead_players.append(p)
                 
@@ -145,11 +144,12 @@ def gamestart():
                         names = ", ".join(p.name for p in dead_players)
                         print(f"\n💀 {names}이(가) 치사량에 도달했습니다!")
                     gameover()
-                    return
+                    return  # 전체 게임 종료
                 
                 # 치사량에 도달하지 않았다면 실제로 마시기
                 for p in drink_players:
                     p.drink(1)
+                    print(f"\n🍺 {p.name}님이 한 잔 마셨습니다! (현재 {p.drinks}/{p.tolerance}잔)")
                 
                 # 이번 게임에서 마신 사람이 다음 게임 선택자가 됨
                 if drink_players:
@@ -158,12 +158,13 @@ def gamestart():
                     # 마신 사람부터 시작하도록 배열 재정렬
                     start_index = all_players.index(current_player)
                     all_players = all_players[start_index:] + all_players[:start_index]
-                    break
+                    continue  # 메인 게임 루프 계속
                 else:
                     # 아무도 마시지 않았다면 가장 많이 마신 사람 중에서 선택
                     max_drinks = max(p.drinks for p in all_players)
                     next_players = [p for p in all_players if p.drinks == max_drinks]
                     current_player = random.choice(next_players)
+                    print(f"\n👉 아무도 마시지 않아 가장 많이 마신 {current_player.name}님이 다음 게임을 선택합니다!")
                 
             else:
                 print("잘못된 번호입니다. 다시 선택하세요.")
