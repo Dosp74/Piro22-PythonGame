@@ -1,3 +1,5 @@
+"""
+demo_strawberry
 import time as t
 
 ### test를 위해 설정한 임의의 이름들
@@ -105,3 +107,4 @@ def strawberry_game(player, person_list):
 ### main.py에서 작성할 코드들
 ### drunken: 술 마실 사람(주량 깎일 사람)을 받아옴
 drunken = strawberry_game(name_straw, person_straw)
+"""
