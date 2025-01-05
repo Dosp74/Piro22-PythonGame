@@ -148,19 +148,24 @@ def gamestart():
                         result = game_like(p.name, all_players, p != player)
                     
                     # 게임 결과에 따라 마실 사람 리스트에 추가
-                    if isinstance(result, list):  # 이미 리스트로 반환된 경우
+                    if isinstance(result, list):
                         drink_players.extend(result)
                     else:  # 숫자로 반환된 경우
                         if result > 0:
                             drink_players.append(p)
+                    
+                    # 마실 사람이 있으면 게임 종료하고 다음 플레이어로
+                    if drink_players:
+                        break
                 
-                # 게임 결과 반영
-                dead_players = []  # 치사량에 도달한 플레이어들
+                # 게임 결과 반영 및 치사량 체크
+                dead_players = []
                 for p in drink_players:
-                    if p.drink(1):  # 1잔씩 마시기
+                    # 마시기 전에 치사량 체크
+                    if p.drinks + 1 >= p.tolerance:
                         dead_players.append(p)
                 
-                if dead_players:  # 치사량 도달한 플레이어가 있다면
+                if dead_players:  # 치사량 도달할 플레이어가 있다면
                     if len(dead_players) == 1:
                         print(f"\n💀 {dead_players[0].name}이(가) 치사량({dead_players[0].tolerance}잔)에 도달했습니다!")
                     else:
@@ -169,9 +174,18 @@ def gamestart():
                     gameover()
                     return
                 
-                max_drinks = max(p.drinks for p in all_players)
-                next_players = [p for p in all_players if p.drinks == max_drinks]
-                current_player = random.choice(next_players)
+                # 치사량에 도달하지 않았다면 실제로 마시기
+                for p in drink_players:
+                    p.drink(1)
+                
+                # 이번 게임에서 마신 사람이 다음 게임 선택자가 됨
+                if drink_players:
+                    current_player = random.choice(drink_players)
+                else:
+                    # 아무도 마시지 않았다면 가장 많이 마신 사람 중에서 선택
+                    max_drinks = max(p.drinks for p in all_players)
+                    next_players = [p for p in all_players if p.drinks == max_drinks]
+                    current_player = random.choice(next_players)
                 
             else:
                 print("잘못된 번호입니다. 다시 선택하세요.")
