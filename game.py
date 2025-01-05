@@ -113,7 +113,7 @@ def gamestart():
                         result = number_game(all_players, p != player)
                     elif choice == 2:
                         friend_list = [fr for fr in all_players if fr!=p]
-                        result = 가위바위보하나빼기(p.name, friend_list, p != player)
+                        result = 가위바위보하나빼기(p, friend_list, p != player)
                     elif choice == 3:
                         result = 시장에가면(p.name, all_players, p != player)
                     elif choice == 4:
@@ -131,8 +131,8 @@ def gamestart():
                     if drink_players:  # 마실 사람이 있으면 현재 게임만 종료
                         break
                 
-                # 게임 결과 반영 및 치사량 체크
-                dead_players = []
+                # 게임 결과 반영
+                dead_players = []  # 치사량에 도달한 플레이어들
                 for p in drink_players:
                     if p.drinks + 1 >= p.tolerance:
                         dead_players.append(p)
