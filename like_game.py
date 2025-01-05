@@ -43,7 +43,7 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
     
     print(f"\n{current_player.name}님의 차례입니다!")
     time.sleep(0.5)
-    print(f"{current_player.name}: {selected_player.name}님, 저... 좋아합니다...♥")
+    print(f"{current_player.name}: {selected_player.name}님, 좋아합니다!")
     time.sleep(0.5)
 
     # 응답 처리
