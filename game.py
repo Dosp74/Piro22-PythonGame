@@ -138,16 +138,13 @@ def gamestart():
                     elif choice == 2:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 가위바위보하나빼기(p.name, friend_list, p != player)
-
                     elif choice == 3:
                         result = 시장에가면(p.name, all_players, p != player)
                     elif choice == 4:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 딸기게임(p.name, friend_list, p != player)
                     elif choice == 5:
-                        # result = game_like(p != player)
-                        # result = game_like(all_players)
-                        result = game_like(all_players, current_player)
+                        result = game_like(p.name, all_players, p != player)
                     
                     # 게임 결과 반영
                     is_dead = p.drink(result)
