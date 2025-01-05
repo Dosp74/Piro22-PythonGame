@@ -70,22 +70,94 @@
 #### 2.5 좋아 게임 (like_game.py)
 - [ ] 게임 로직 구현 필요
 
-## 함수 모듈화
+## **모듈 구조**
 
-### game.py
-- `class Player`: 플레이어 정보 관리
-  - `__init__(name, tolerance)`: 플레이어 초기화
-  - `drink(amount)`: 음주량 추가 및 치사량 체크
-- `gamestart()`: 게임 시작 및 메인 로직
-- `gameover()`: 게임 종료 화면 출력
+### **game.py**
+- **클래스**
+  - `class Player`: 플레이어 정보 관리
+    - `__init__(name, tolerance)`: 플레이어 초기화
+    - `drink(amount) -> bool`: 음주량 추가 및 치사량 체크
+      - 매개변수:
+        - `amount (int)`: 추가로 마셔야 할 잔 수
+      - 반환값:
+        - `True`: 치사량 도달
+        - `False`: 치사량 미도달
+- **함수**
+  - `gamestart()`: 게임 시작 및 메인 로직
+  - `gameover()`: 게임 종료 화면 출력
 
-### number_game.py
-- `숫자맞추기(is_friend=False)`: 숫자 맞추기 게임 실행
-  - 매개변수:
-    - `is_friend`: AI 플레이어 여부
-  - 반환값:
-    - 성공: 0
-    - 실패: 1 (벌칙 잔 수)
+---
+
+### **number_game.py**
+- **함수**
+  - `숫자맞추기(is_friend=False)`: 숫자 맞추기 게임 실행
+    - 매개변수:
+      - `is_friend (bool)`: AI 플레이어 여부
+    - 반환값:
+      - 성공: `0`
+      - 실패: `1` (벌칙 잔 수)
+
+---
+
+### **rps_game.py**
+- **함수**
+  - `가위바위보하나빼기(players, is_human) -> dict`
+    - **설명**: 가위바위보에서 승자를 제외한 패자들이 벌주를 마시는 게임
+    - 매개변수:
+      - `players (list[Player])`: 참가자 리스트
+      - `is_human (bool)`: 현재 플레이어가 실제 사용자 여부
+    - 반환값:
+      - `{Player: int}`: 패자와 마셔야 할 잔 수
+
+---
+
+### **market_game.py**
+- **함수**
+  - `시장에가면(players, is_human) -> dict`
+    - **설명**: 규칙에 맞는 단어를 말하는 게임
+    - 매개변수:
+      - `players (list[Player])`: 참가자 리스트
+      - `is_human (bool)`: 현재 플레이어가 실제 사용자 여부
+    - 반환값:
+      - `{Player: int}`: 실패한 플레이어와 마셔야 할 잔 수
+
+---
+
+### **strawberry_game.py**
+- **함수**
+  - `strawberry_game(current_player, other_players) -> dict`
+    - **설명**: 박자에 맞춰 '딸기'를 외치는 게임
+    - 매개변수:
+      - `current_player (str)`: 현재 차례인 플레이어 이름
+      - `other_players (list[str])`: 다른 플레이어 이름 리스트
+    - 반환값:
+      - `{Player: int}`: 패자와 마셔야 할 잔 수
+
+---
+
+### **like_game.py**
+- **함수**
+  - `좋아게임(players, is_human) -> dict`
+    - **설명**: 질문과 대답으로 상대를 곤란하게 만드는 게임
+    - 매개변수:
+      - `players (list[Player])`: 참가자 리스트
+      - `is_human (bool)`: 현재 플레이어가 실제 사용자 여부
+    - 반환값:
+      - `{Player: int}`: 실패한 플레이어와 마셔야 할 잔 수
+
+---
+
+## **게임 결과 처리**
+- 모든 게임은 `{Player: int}` 형식의 결과를 반환
+  - `Player`: 벌주를 마셔야 하는 플레이어 객체
+  - `int`: 추가로 마셔야 할 잔 수
+- 반환된 결과를 통해 `drink(amount)` 메서드를 호출하여 벌주 적용
+
+---
+
+## **게임 종료**
+- **조건**: 플레이어 중 한 명이라도 `tolerance`를 초과하면 게임 종료
+- **동작**: 종료 메시지 출력 및 프로그램 종료
 
 ## 진행 상황
 - [x] 기본 게임 시스템 구현
