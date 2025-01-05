@@ -70,9 +70,11 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         print(", ".join(rps_players_name))
         while True:     
             try:
-                rps_enemy=input("후보 안에서 대결상대를 골라주세요!")
-                if rps_enemy not in rps_players_name:
+                rps_enemy_name=input("후보 안에서 대결상대를 골라주세요!")
+                if rps_enemy_name not in rps_players_name:
                     raise ValueError
+                rps_enemy = next((player for player in available_names if player.name == rps_enemy_name), None)
+
                 break  
             except ValueError:
                 t.sleep(1)
@@ -94,7 +96,7 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
                 print("입력 형식이 올바르지 않아요! '가위 바위'처럼 두 개의 값을 띄어쓰기로 구분해서 입력해주세요.😊")
 
         rps_enemy_left, rps_enemy_right=r.sample(rps_list,2)
-        print(f"{rps_enemy}는 {rps_enemy_left} {rps_enemy_right}를 냈네요!!")
+        print(f"{rps_enemy_name}는 {rps_enemy_left} {rps_enemy_right}를 냈네요!!")
 
         t.sleep(1)
         while True:
@@ -118,29 +120,30 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         t.sleep(1)
         print(f"{current_player_name}는 {rps_final}를 냈어요.")
         rps_enemy_final=r.choice([rps_enemy_left, rps_enemy_right])
-        print(f"{rps_enemy}는 {rps_enemy_final}를 냈어요.")
+        print(f"{rps_enemy_name}는 {rps_enemy_final}를 냈어요.")
 
         rps_player_win=[("가위","보"),("보","바위"),("바위","가위")]
         rps_enemy_win=[("보","가위"),("바위","보"),("가위","바위")]
 
         t.sleep(1)
         if rps_final==rps_enemy_final:
-            print("무승부입니다! 둘다 반잔씩 마시세요.🍺")  
+            print("무승부입니다! 둘다 한한잔씩 마시세요.🍺")  
             return [ current_player ,rps_enemy]
 
         elif (rps_final,rps_enemy_final) in rps_player_win:
             print(f"{current_player_name} wins~")
-            print(f"{rps_enemy}한잔하세요~")
-            return rps_enemy
+            print(f"{rps_enemy_name}한잔하세요~")
+            return[rps_enemy]
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
-            print(f"{rps_enemy} wins~")
+            print(f"{rps_enemy_name} wins~")
             print(f"{current_player_name}한잔하세요~")
             return 1
         
 
     elif is_friend:
-        rps_enemy=r.choice(rps_players_name)
-        print( f"당신의 상대는 {rps_enemy}😱 ")
+        rps_enemy_name=r.choice( rps_players_name)
+        rps_enemy=next((player for player in available_names if player.name == rps_enemy_name), None)
+        print( f"당신의 상대는 {rps_enemy_name}😱 ")
 
         t.sleep(1)
         print("===================<🎮게임 시작!>===================")
@@ -151,7 +154,7 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         print(f"당신은 {rps_left} {rps_right}를 냈네요!!")
 
         rps_enemy_left, rps_enemy_right=r.sample(rps_list,2)
-        print(f"{rps_enemy}는 {rps_enemy_left} {rps_enemy_right}를 냈네요!!")
+        print(f"{rps_enemy_name}는 {rps_enemy_left} {rps_enemy_right}를 냈네요!!")
 
         t.sleep(1)
   
@@ -164,22 +167,22 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
         t.sleep(1)
         print(f"{current_player_name}는 {rps_final}를 냈어요.")
         rps_enemy_final=r.choice([rps_enemy_left, rps_enemy_right])
-        print(f"{rps_enemy}는 {rps_enemy_final}를 냈어요.")
+        print(f"{rps_enemy_name}는 {rps_enemy_final}를 냈어요.")
 
         rps_player_win=[("가위","보"),("보","바위"),("바위","가위")]
         rps_enemy_win=[("보","가위"),("바위","보"),("가위","바위")]
 
         t.sleep(1)
         if rps_final==rps_enemy_final:
-            print("무승부입니다! 둘다 반잔씩 마시세요.🍺")  
+            print("무승부입니다! 둘다 한잔씩 마시세요.🍺")  
             return [current_player ,rps_enemy]
 
         elif (rps_final,rps_enemy_final) in rps_player_win:
             print(f"{current_player_name} wins~")
-            print(f"{rps_enemy}한잔하세요~")
-            return rps_enemy
+            print(f"{rps_enemy_name}한잔하세요~")
+            return [rps_enemy]
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
-            print(f"{rps_enemy} wins~")
+            print(f"{rps_enemy_name} wins~")
             print(f"{current_player_name}한잔하세요~")
             return 1
         
