@@ -2,7 +2,7 @@ import random
 from number_game import 숫자맞추기
 from rps_game import 가위바위보하나빼기
 from market_game import 시장에가면
-from strawberry_game import 딸기게임
+from strawberry_game import strawberry_game
 from like_game import 좋아게임
 import time
 
@@ -35,6 +35,8 @@ import time
 '''
 
 # 게임 리스트
+global games
+global players_name
 games = ["숫자 맞추기", "가위바위보 하나빼기", "시장에 가면", "딸기 게임", "좋아 게임"]
 players_name = ["다오", "경민", "서정", "종서", "주영"]
 
@@ -128,7 +130,7 @@ def gamestart():
         try:
             choice = int(choice)
             if 1 <= choice <= len(games):
-                # 선택된 게임을 모든 플레이어가 진행
+                # 선택된 게임 실행
                 print(f"\n=== {games[choice-1]} 시작! ===")
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
