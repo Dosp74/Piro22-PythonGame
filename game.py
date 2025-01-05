@@ -146,7 +146,9 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 딸기게임(p.name, friend_list, p != player)
                     elif choice == 5:
-                        result = game_like(p != player)
+                        # result = game_like(p != player)
+                        # result = game_like(all_players)
+                        result = game_like(p.name, current_player)
                     
                     # 게임 결과 반영
                     is_dead = p.drink(result)

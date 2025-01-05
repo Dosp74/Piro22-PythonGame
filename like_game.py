@@ -1,8 +1,10 @@
 import random
 
-def game_like(players):
+# def game_like(players):
+def game_like(name, trigger_player):
     main_player = players[0]
-    current_player = players[0]  # 항상 첫 번째 플레이어로 시작
+    # current_player = players[0]  # 항상 첫 번째 플레이어로 시작
+    current_player = trigger_player
     rejection_count = 0
 
     print('''
@@ -63,4 +65,5 @@ def game_like(players):
             rejection_count += 1
             if rejection_count >= 3:
                 print("좋아게임이 종료되었습니다.")
-                return players.index(current_player)
+                # return players.index(current_player)
+                return 1
