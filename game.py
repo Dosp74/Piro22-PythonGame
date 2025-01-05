@@ -1,10 +1,10 @@
 import random
+import time
 from number_game import 숫자맞추기
 from rps_game import 가위바위보하나빼기
 from market_game import 시장에가면
 from strawberry_game import 딸기게임
-from like_game import 좋아게임
-import time
+from like_game import game_like
 
 '''
     A[게임 시작] --> B[플레이어 정보 입력]
@@ -136,7 +136,7 @@ def gamestart():
                     print(f"\n{p.name}의 차례!")
                     result = 0
                     if choice == 1:
-                        result = 숫자맞추기(p != player)
+                        result = 숫자맞추기(all_players, p != player)
                     elif choice == 2:
                         result = 가위바위보하나빼기(p != player)
                     elif choice == 3:
@@ -145,7 +145,7 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 딸기게임(p.name, friend_list, p != player)
                     elif choice == 5:
-                        result = 좋아게임(p != player)
+                        result = game_like(p != player)
                     
                     # 게임 결과 반영
                     is_dead = p.drink(result)

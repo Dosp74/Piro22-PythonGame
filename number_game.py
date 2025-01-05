@@ -36,7 +36,8 @@ def 숫자맞추기(players, is_real_player=False):
         previous_guesses = []
         
         while attempts < max_attempts:
-            if player != players[0]:  # AI 플레이어
+            # if player != players[0]:  # AI 플레이어
+            if is_real_player == True:
                 time.sleep(1)
                 if not previous_guesses:
                     guess = random.randint(1, 10)
@@ -61,7 +62,8 @@ def 숫자맞추기(players, is_real_player=False):
             
             if guess == target:
                 print(f"정답입니다! {attempts}번 만에 맞추셨네요!")
-                result[player] = 0
+                # result[player] = 0
+                return 0
                 break
             elif guess < target:
                 result = "Up"
@@ -75,6 +77,8 @@ def 숫자맞추기(players, is_real_player=False):
                 
             if attempts == max_attempts:
                 print(f"\n기회를 모두 소진했습니다. 정답은 {target}였습니다!")
-                result[player] = 1
+                # result[player] = 1
+                return 1
     
-    return result
+    # return result[player]
+    return 0
