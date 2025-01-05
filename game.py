@@ -2,7 +2,7 @@ import random
 from number_game import 숫자맞추기
 from rps_game import 가위바위보하나빼기
 from market_game import 시장에가면
-from strawberry_game import strawberry_game
+from strawberry_game import 딸기게임
 from like_game import 좋아게임
 import time
 
