@@ -63,5 +63,6 @@ def game_like(players_like, start_index):
         else:
             rejection_count_like += 1
             if rejection_count_like >= 3:
+                like_game_loser=selected_player_like
                 print("좋아게임이 종료되었습니다.")
                 return players_like.index(current_player_like)
