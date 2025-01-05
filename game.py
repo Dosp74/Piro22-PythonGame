@@ -102,12 +102,10 @@ def gamestart():
     current_player = player  # 게임 선택자
 
     while True:
-        # 모든 플레이어의 현재 상태 출력
         print("\n=== 현재 상태 ===")
         for p in all_players:
             print(f"{p.name}: {p.drinks}잔 / {p.tolerance}잔")
         
-        # 현재 턴의 플레이어가 게임 선택
         print(f"\n=== {current_player.name}의 게임 선택 ===")
         
         if current_player == player:  # 실제 플레이어 차례
@@ -121,7 +119,7 @@ def gamestart():
                 gameover()
                 break
         else:  # 다른 플레이어 차례
-            time.sleep(1)  # 생각하는 시간
+            time.sleep(1)
             print(f"\n{current_player.name}(이)가 고민중...")
             time.sleep(0.5)
             choice = str(random.randint(1, len(games)))  # 랜덤으로 게임 선택
@@ -130,7 +128,6 @@ def gamestart():
         try:
             choice = int(choice)
             if 1 <= choice <= len(games):
-                # 선택된 게임 실행
                 print(f"\n=== {games[choice-1]} 시작! ===")
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
@@ -157,7 +154,6 @@ def gamestart():
                         gameover()
                         return
                 
-                # 다음 게임 선택자 결정 (현재 가장 많이 마신 사람)
                 max_drinks = max(p.drinks for p in all_players)
                 next_players = [p for p in all_players if p.drinks == max_drinks]
                 current_player = random.choice(next_players)
