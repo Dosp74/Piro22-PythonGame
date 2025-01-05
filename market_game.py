@@ -29,7 +29,18 @@ def 시장에가면(name, players, is_human):
     print("콘솔에는 물건의 이름만 입력하면 됩니다!\n")
     time.sleep(1)
     print("준비되셨나요? 그럼 시작합니다~")
-    print("=================작
+    print("===========================================")
+    time.sleep(1)
+
+    print("\n===== 시장에 가면~ =====")
+    time.sleep(1)
+    print("\n===== 시장에 가면~ =====\n")
+    time.sleep(1)
+
+    count = 1
+    gameItemList = []
+    randomCeil = random.randint(13, 18)
+    start_index = next((i for i, player in enumerate(players) if player.name == name), 0)
     players = players[start_index:] + players[:start_index]
     if is_human == False: # 사람이 게임 선택자인 경우
         randomCount = random.randint(8, 12)
