@@ -57,12 +57,26 @@ def 가위바위보하나빼기(current_player,available_names, is_friend=False)
     t.sleep(1)
 
     rps_list = ["가위", "바위", "보"]
- 
-    rps_players_name = available_names[:]
+    rps_players_name=[]
+    for i in available_names:
+        name=i.name
+        rps_players_name.append(name)
+    
    
 
     if not is_friend:
-        rps_enemy=r.choice(rps_players_name)
+        print("대결상대 후보를 알려줄게요-!")
+        print(", ".join(rps_players_name))
+        while True:     
+            try:
+                rps_enemy=input("후보 안에서 대결상대를 골라주세요!")
+                if rps_enemy not in rps_players_name:
+                    raise ValueError
+                break  
+            except ValueError:
+                t.sleep(1)
+                print( "자리에 없는 사람이에요!! 다시 골라주세요")
+            
         print("===================<🎮게임 시작!>===================")
 
         t.sleep(1) 
