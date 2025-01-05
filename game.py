@@ -147,6 +147,7 @@ def gamestart():
                         result = game_like(p.name, all_players, p != player)
                     
                     # 게임 결과 반영
+
                     is_dead = p.drink(result)
                     if is_dead:
                         print(f"\n{p.name}이(가) 치사량({p.tolerance}잔)에 도달했습니다!")

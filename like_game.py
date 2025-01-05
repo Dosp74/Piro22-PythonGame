@@ -69,36 +69,29 @@ def game_like(current_name: str, players: list, is_ai: bool) -> int:
     time.sleep(0.5)  # 세 번째 breakpoint: 응답 순간
     print(f"{selected_player.name}: {reaction}")
 
-<<<<<<< HEAD
         ### 선택된 사람이 나일 때 반응
-        if selected_player_like == main_player_like:
-            while True:
-                try:
-                    response_like = int(input("1: 나도 좋아!  2: 칵, 퉤! "))
-                    if response_like in [1, 2]:
-                        break
-                    else:
-                        print("1 또는 2를 입력하세요.")
-                except ValueError:
-                    print("숫자를 입력하세요.")
-            reaction_like = "나도 좋아" if response_like == 1 else "칵, 퉤!"
-        else:   ### 선택된 사람이 내가 아닐 때
-            reaction_like = random.choice(["나도 좋아!", "칵, 퉤!"])
-        
-        print(f"{selected_player_like.name}: {reaction_like}")
+    if selected_player_like == main_player_like:
+        while True:
+            try:
+                response_like = int(input("1: 나도 좋아!  2: 칵, 퉤! "))
+                if response_like in [1, 2]:
+                    break
+                else:
+                    print("1 또는 2를 입력하세요.")
+            except ValueError:
+                print("숫자를 입력하세요.")
+        reaction_like = "나도 좋아" if response_like == 1 else "칵, 퉤!"
+    else:   ### 선택된 사람이 내가 아닐 때
+        reaction_like = random.choice(["나도 좋아!", "칵, 퉤!"])
+    
+    print(f"{selected_player_like.name}: {reaction_like}")
 
-        if reaction_like == "나도 좋아!":
-            current_player_like = selected_player_like
-            rejection_count_like = 0
-        else:
-            rejection_count_like += 1
-            if rejection_count_like >= 3:
-                like_game_loser=selected_player_like
-                print("좋아게임이 종료되었습니다.")
-                return players_like.index(current_player_like)
-=======
-    if reaction == "나도 좋아!":
-        return 0  # 성공
+    if reaction_like == "나도 좋아!":
+        current_player_like = selected_player_like
+        rejection_count_like = 0
     else:
-        return 1  # 실패
->>>>>>> e8f52dd27a63df02f07cdbecce7b1084ca75ff89
+        rejection_count_like += 1
+        if rejection_count_like >= 3:
+            like_game_loser=selected_player_like
+            print("좋아게임이 종료되었습니다.")
+            return players_like.index(current_player_like)
