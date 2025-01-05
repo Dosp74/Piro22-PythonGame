@@ -12,7 +12,7 @@ import time
        └── 실패: 1잔
 '''
 
-def 숫자맞추기(players, is_real_player=False):
+def number_game(players, is_real_player=False):
     """
     1~10 사이의 숫자를 맞추는 게임
     Args:
@@ -30,7 +30,7 @@ def 숫자맞추기(players, is_real_player=False):
     print("기회를 모두 사용하면 1잔을 마셔야 합니다!")
     
     for player in players:
-        print(f"\n{player.name}의 차례!")
+        # print(f"\n{player.name}의 차례!")
         attempts = 0
         max_attempts = 5
         previous_guesses = []
