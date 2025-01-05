@@ -64,10 +64,6 @@ def 시장에가면(name, players, is_human):
                         print(gameItemList[i] + "도 있고 ~ ", end="")
                         #time.sleep(1)
                 count += 1
-<<<<<<< HEAD
             print("\n")
 
 #시장에가면(players) # end=""로 가로 출력 시 출력 후 딜레이, 출력 후 딜레이 이런 식으로 생동감 있게 구현하려고 했으나 안 됨(뭐가 문제일까?)
-=======
-            print("\n")
->>>>>>> 3316a05c58512d343d729b6a233efc3d635ad205
