@@ -1,9 +1,9 @@
 import random
 import time
 from number_game import number_game
-from rps_game import 가위바위보하나빼기
-from market_game import 시장에가면
-from strawberry_game import 딸기게임
+from rps_game import rps_game
+from market_game import market_game
+from strawberry_game import strawberry_game
 from like_game import game_like
 import time
 
@@ -113,12 +113,12 @@ def gamestart():
                         result = number_game(p, p == player)
                     elif choice == 2:
                         friend_list = [fr for fr in all_players if fr!=p]
-                        result = 가위바위보하나빼기(p, friend_list, p != player)
+                        result = rps_game(p, friend_list, p != player)
                     elif choice == 3:
-                        result = 시장에가면(p.name, player.name, all_players)
+                        result = market_game(p.name, player.name, all_players)
                     elif choice == 4:
                         friend_list = [fr for fr in all_players if fr!=p]
-                        result = 딸기게임(p, friend_list, p != player)
+                        result = strawberry_game(p, friend_list, p != player)
                     elif choice == 5:
                         result = game_like(p.name, player.name, all_players)
                     
