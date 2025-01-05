@@ -151,7 +151,7 @@ def 시장에가면(name, players, is_human,me):
                             item = random.choice(itemList)
                             while item in gameItemList:
                                 item = random.choice(itemList)
-                            gameItemList.append(item)
+                             gameItemList.append(item)
                             print(gameItemList[i] + "도 있고 ~ ", end="")
                             #time.sleep(1)
                             continue

@@ -120,7 +120,7 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 딸기게임(p, friend_list, p != player)
                     elif choice == 5:
-                        result = game_like(p.name, all_players, p != player)
+                        result = game_like(p.name, player.name, all_players)
                     
                     if isinstance(result, list):
                         drink_players.extend(result)
