@@ -1,7 +1,6 @@
-def 가위바위보하나빼기(current_player,available_names,is_friend=False):
+def 가위바위보하나빼기(current_player,available_names, is_friend=False):
     import time as t
     import random as r
-
     print("가위바위보 하나 빼기 1을 선택했군요")
     print("규칙을 설명해줄게요!")
     t.sleep(2)
@@ -57,28 +56,17 @@ def 가위바위보하나빼기(current_player,available_names,is_friend=False):
     print("**자, 가위바위보 하나빼기 1 시작해볼까요?! 🙌**")
     t.sleep(1)
 
-
     rps_list = ["가위", "바위", "보"]
  
-    rps_players_name = available_names
-    rps_players_name.remove(f"{current_player}")
+    rps_players_name = available_names[:]
+   
 
     if not is_friend:
-        rps_enemy=input( "본인 제외 한명을 지목하여 이름을 입력해주세요😱 ")
-        while rps_enemy== current_player:
-            print("혼자서 게임을 할 수는 없어요~")
-            t.sleep(1)
-            rps_enemy=input( "다시 한명을 지목하여 이름을 입력해주세요~~😱 ")
-
-        while rps_enemy not in rps_players_name:
-            print("자리에 없는 사람이에요 다시 입력해주세요😱 ")
-            t.sleep(1)
-            rps_enemy=input( "다시 한명을 지목하여 이름을 입력해주세요~~😱 ")
-
-        t.sleep(1)
+        rps_enemy=r.choice(rps_players_name)
         print("===================<🎮게임 시작!>===================")
 
-        t.sleep(1)
+        t.sleep(1) 
+     
         while True:
             t.sleep(1)
             try:
@@ -128,15 +116,15 @@ def 가위바위보하나빼기(current_player,available_names,is_friend=False):
         elif (rps_final,rps_enemy_final) in rps_player_win:
             print(f"{current_player} wins~")
             print(f"{rps_enemy}한잔하세요~")
-            return 1
+            return 0
         elif (rps_final,rps_enemy_final) in rps_enemy_win:
             print(f"{rps_enemy} wins~")
             print(f"{current_player}한잔하세요~")
             return 1
         
 
-    if is_friend:
-        rps_enemy=r.choice([available_names])
+    elif is_friend:
+        rps_enemy=r.choice(rps_players_name)
         print( f"당신의 상대는 {rps_enemy}😱 ")
 
         t.sleep(1)
