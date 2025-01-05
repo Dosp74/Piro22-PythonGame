@@ -148,7 +148,7 @@ def gamestart():
                     elif choice == 5:
                         # result = game_like(p != player)
                         # result = game_like(all_players)
-                        result = game_like(p.name, current_player)
+                        result = game_like(all_players, current_player)
                     
                     # 게임 결과 반영
                     is_dead = p.drink(result)
