@@ -7,7 +7,7 @@ _game_session_id = None
 def game_like(current_player_name: str, real_player_name: str, all_players: list) -> list:
     global _game_session_id
     
-    # 현재 게임 세션 확인
+    # 현재 게임 세션 확인 (all_players 리스트의 ID를 사용)
     current_session = id(all_players)
     
     # 새로운 게임 세션인 경우에만 설명 출력
@@ -33,12 +33,12 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
         print("준비되셨나요? 그럼 시작합니다~")
         time.sleep(0.5)
 
-    # 현재 플레이어 찾기
-    current_player = next(p for p in all_players if p.name == current_player_name)
+    # 현재 플레이어 찾기 (Player 객체만 필터링)
+    current_player = next(p for p in all_players if hasattr(p, 'name') and p.name == current_player_name)
     rejection_count = 0
 
-    # 고백 대상 선택 (자기 자신 제외)
-    available_players = [p for p in all_players if p != current_player]
+    # 고백 대상 선택 (자기 자신 제외, Player 객체만 선택)
+    available_players = [p for p in all_players if hasattr(p, 'name') and p != current_player]
     selected_player = random.choice(available_players)
     
     print(f"\n{current_player.name}님의 차례입니다!")
@@ -47,7 +47,7 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
     time.sleep(0.5)
 
     # 응답 처리
-    if selected_player.name == real_player_name:
+    if selected_player.name == real_player_name:  # 실제 플레이어가 선택되었을 때
         while True:
             try:
                 response = int(input("1: 나도 좋아!  2: 칵, 퉤! "))
@@ -58,7 +58,7 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
             except ValueError:
                 print("숫자를 입력하세요.")
         reaction = "나도 좋아!" if response == 1 else "칵, 퉤!"
-    else:
+    else:  # AI가 응답할 때
         reaction = random.choice(["나도 좋아!", "칵, 퉤!"])
     
     time.sleep(0.5)

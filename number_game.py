@@ -2,24 +2,23 @@ import random
 import time
 
 # 현재 진행 중인 게임 세션을 추적하는 변수
-_current_game_session = None
+_game_session_id = None
 
-def number_game(players, is_real_player=False):
+def number_game(current_player, is_real_player=False):
     """
     1~10 사이의 숫자를 맞추는 게임
     Args:
-        players (list): 참여하는 플레이어 목록
-        is_real_player (bool): 실제 플레이어의 턴인지 여부
+        current_player (Player): 현재 플레이어
+        is_real_player (bool): 실제 플레이어인지 여부
     Returns:
         list: 술을 마셔야 하는 플레이어 리스트
     """
-    global _current_game_session
-    target = random.randint(1, 10)
-    current_player = players[0] if not is_real_player else players[1]  # 현재 플레이어
+    global _game_session_id
+    current_session = id(str(current_player.name))  # 플레이어 이름의 문자열 ID를 사용
     
     # 새로운 게임 세션인지 확인
-    if _current_game_session != id(players):
-        _current_game_session = id(players)
+    if _game_session_id != current_session:
+        _game_session_id = current_session
         print('''
     ███╗   ██╗██╗   ██╗███╗   ███╗██████╗ ███████╗██████╗      ██████╗  █████╗ ███╗   ███╗███████╗
     ████╗  ██║██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝
@@ -33,13 +32,14 @@ def number_game(players, is_real_player=False):
         print("기회는 5번 있습니다.")
         print("기회를 모두 사용하면 1잔을 마셔야 합니다!")
         print("========================================================")
-    
+
+    target = random.randint(1, 10)
     attempts = 0
     max_attempts = 5
     previous_guesses = []
     
     while attempts < max_attempts:
-        if is_real_player:  # AI 플레이어
+        if not is_real_player:  # AI 플레이어
             time.sleep(1)
             if not previous_guesses:
                 guess = random.randint(1, 10)
@@ -74,7 +74,7 @@ def number_game(players, is_real_player=False):
             result = "Down"
             print("⬇️ Down! 더 작은 숫자입니다.")
             
-        if is_real_player:
+        if not is_real_player:
             previous_guesses.append((guess, result))
             
         if attempts == max_attempts:
