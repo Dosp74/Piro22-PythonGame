@@ -1,7 +1,7 @@
 import random
 import time
 
-def 시장에가면(me, name, players):
+def market_game(me, name, players):
     itemList = ["사과", "고등어", "소주", "맥주", "문어", "갈치", "휴대폰", "TV", 
                 "노트북", "컵", "휴지", "물티슈", "바나나", "커피", "콜라", "초콜릿", 
                 "우유", "빵", "계란", "치킨", "피자", "햄버거", "케이크", "컵라면", 

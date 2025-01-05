@@ -1,4 +1,4 @@
-def 가위바위보하나빼기(current_player,available_names, is_friend=False):
+def rps_game(current_player,available_names, is_friend=False):
     import time as t
     import random as r
     print("""

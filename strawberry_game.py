@@ -1,7 +1,7 @@
 import time as t
 import random as r
 
-def 딸기게임(straw_player_object, friend_list, is_friend=False):
+def strawberry_game(straw_player_object, friend_list, is_friend=False):
     ### is_friend=False => 실제 사용자
     ### is_friend=True => 컴퓨터 사용자
     straw_player = straw_player_object.name
@@ -56,7 +56,6 @@ def 딸기게임(straw_player_object, friend_list, is_friend=False):
     t.sleep(2)
 
     if not is_friend:
-        ### p == player(실제 사용자)
         print("👏👏👏 딸기")
         t.sleep(1)
         print("👏👏 딸~기")
