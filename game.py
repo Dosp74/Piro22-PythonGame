@@ -132,29 +132,27 @@ def gamestart():
             if 1 <= choice <= len(games):
                 # 선택된 게임 실행
                 print(f"\n=== {games[choice-1]} 시작! ===")
-                result = None
-                
-                if choice == 1:
-                    result = 숫자맞추기(all_players, current_player == player)
-                elif choice == 2:
-                    result = 가위바위보하나빼기(all_players, current_player == player)
-                elif choice == 3:
-                    result = 시장에가면(all_players, current_player == player)
-                if choice == 4:  # 딸기 게임 선택 시
-                    loser_name = strawberry_game(current_player.name, [p.name for p in all_players if p.name != current_player.name])
-                    if loser_name:
-                        result = {p: 1 for p in all_players if p.name == loser_name}  # 패배자만 마신 잔 수 1 증가
-                elif choice == 5:
-                    result = 좋아게임(all_players, current_player == player)
-                
-                # 게임 결과 반영
-                if result:  # 실패한 플레이어가 있다면
-                    for p, drinks in result.items():
-                        is_dead = p.drink(drinks)
-                        if is_dead:
-                            print(f"\n{p.name}이(가) 치사량({p.tolerance}잔)에 도달했습니다!")
-                            gameover()
-                            return
+                for p in all_players:
+                    print(f"\n{p.name}의 차례!")
+                    result = 0
+                    if choice == 1:
+                        result = 숫자맞추기(p != player)
+                    elif choice == 2:
+                        result = 가위바위보하나빼기(p != player)
+                    elif choice == 3:
+                        result = 시장에가면(p != player)
+                    elif choice == 4:
+                        friend_list = [fr for fr in all_players if fr!=p]
+                        result = 딸기게임(p.name, friend_list, p != player)
+                    elif choice == 5:
+                        result = 좋아게임(p != player)
+                    
+                    # 게임 결과 반영
+                    is_dead = p.drink(result)
+                    if is_dead:
+                        print(f"\n{p.name}이(가) 치사량({p.tolerance}잔)에 도달했습니다!")
+                        gameover()
+                        return
                 
                 # 다음 게임 선택자 결정 (현재 가장 많이 마신 사람)
                 max_drinks = max(p.drinks for p in all_players)
