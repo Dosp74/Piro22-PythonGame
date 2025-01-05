@@ -1,7 +1,7 @@
 import random
 import time
 
-def 시장에가면(current_player_name: str, real_player_name: str, players: list):
+def 시장에가면(me, name, players):
     itemList = ["사과", "고등어", "소주", "맥주", "문어", "갈치", "휴대폰", "TV", 
                 "노트북", "컵", "휴지", "물티슈", "바나나", "커피", "콜라", "초콜릿", 
                 "우유", "빵", "계란", "치킨", "피자", "햄버거", "케이크", "컵라면", 
@@ -44,65 +44,36 @@ def 시장에가면(current_player_name: str, real_player_name: str, players: li
     print("\n===== 시장에 가면~ =====\n")
     time.sleep(1)
 
-    gameItemList = []
-    randomCount = random.randint(8, 12)
-    randomCeil = random.randint(15, 20)
     count = 1
-    start_index = next((i for i, player in enumerate(players) if player.name == current_player_name), 0)
+    gameItemList = []
+    randomCeil = random.randint(13, 18)
+    start_index = next((i for i, player in enumerate(players) if player.name == name), 0)
     players = players[start_index:] + players[:start_index]
+    randomCount = random.randint(8, 12)
     while True:
         for player in players:
-            print(f"{player.name} : 시장에 가면~ ", end="")
-            time.sleep(1)
-            
-            is_real_player = player.name == real_player_name
-            is_current_turn = player.name == current_player_name
-            
-            if is_current_turn:  # 현재 턴 플레이어
-                if is_real_player:  # 실제 플레이어면 입력 받기
-                    for i in range(count):
-                        gameItemListLength = len(gameItemList)
-                        myItem = input("")
-                        if i >= gameItemListLength:
-                            gameItemList.append(myItem)
-                            print(gameItemList[i] + "도 있고 ~ ", end="")
-                            #time.sleep(1)
-                        elif myItem == gameItemList[i]:
-                            print(gameItemList[i] + "도 있고 ~ ", end="")
-                            #time.sleep(1)
-                        else:
-                            time.sleep(1)
-                            print("아~ 순서가 틀렸어요😂")
-                            return [player]
-                    count += 1
-                else:  # AI 플레이어면 자동 진행
-                    for i in range(count):
-                        gameItemListLength = len(gameItemList)
-                        if randomCount <= count:
-                            print("어...")
-                            time.sleep(1)
-                            print("아~ 순서가 틀렸어요😂")
-                            return [player]
-                        if randomCeil <= count:
-                            print("애썼다! 다음 게임하자~")
-                            time.sleep(1)
-                            print("승부가 안 나니까 무효...")
-                            return []
-                        if i >= gameItemListLength:
-                            item = random.choice(itemList)
-                            while item in gameItemList:
-                                item = random.choice(itemList)
-                            gameItemList.append(item)
-                            print(gameItemList[i] + "도 있고 ~ ", end="")
-                            #time.sleep(1)
-                            continue
-                        item = gameItemList[i]
-                        if item == gameItemList[i]:
-                            print(gameItemList[i] + "도 있고 ~ ", end="")
-                            #time.sleep(1)
-                    count += 1
-            else:  # 다른 플레이어 턴
+            if player.name == me:
+                print(player.name + " : 시장에 가면~ ", end="")
+                time.sleep(1)
                 for i in range(count):
+                    gameItemListLength = len(gameItemList)
+                    myItem = input("")
+                    if i >= gameItemListLength:
+                        gameItemList.append(myItem)
+                        print(gameItemList[i] + "도 있고 ~ ", end="")
+                        #time.sleep(1)
+                    elif myItem == gameItemList[i]:
+                        print(gameItemList[i] + "도 있고 ~ ", end="")
+                        #time.sleep(1)
+                    else:
+                        time.sleep(1)
+                        print("아~ 순서가 틀렸어요😂")
+                        return [player]
+                count += 1
+            else:
+                print(player.name + " : 시장에 가면~ ", end="")
+                time.sleep(1)
+                for i in range(count): # 현재 로직: 봇은 무조건 게임 통과
                     gameItemListLength = len(gameItemList)
                     if randomCount <= count:
                         print("어...")
@@ -110,10 +81,12 @@ def 시장에가면(current_player_name: str, real_player_name: str, players: li
                         print("아~ 순서가 틀렸어요😂")
                         return [player]
                     if randomCeil <= count:
-                        print("애썼다! 다음 게임하자~")
+                        print("\n\n#####잠깐!##### 승부가 너무 안 나는데?")
                         time.sleep(1)
-                        print("승부가 안 나니까 무효...")
-                        return []
+                        print("못할 것 같은데 그냥 이번 사람이 먹자~")
+                        time.sleep(1)
+                        print(player.name + " : 안 돼😂")
+                        return [player]
                     if i >= gameItemListLength:
                         item = random.choice(itemList)
                         while item in gameItemList:
@@ -126,4 +99,5 @@ def 시장에가면(current_player_name: str, real_player_name: str, players: li
                     if item == gameItemList[i]:
                         print(gameItemList[i] + "도 있고 ~ ", end="")
                         #time.sleep(1)
+                count += 1
             print("\n")
