@@ -110,7 +110,7 @@ def gamestart():
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
                     if choice == 1:
-                        result = number_game(all_players, p != player)
+                        result = number_game(p, p == player)
                     elif choice == 2:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 가위바위보하나빼기(p, friend_list, p != player)
