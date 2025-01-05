@@ -1,9 +1,10 @@
 import time as t
 import random as r
 
-def 딸기게임(straw_player, friend_list, is_friend=False):
+def 딸기게임(straw_player_object, friend_list, is_friend=False):
     ### is_friend=False => 실제 사용자
     ### is_friend=True => 컴퓨터 사용자
+    straw_player = straw_player_object.name
     num=0
     
     print("\n========================================================\n")
@@ -50,7 +51,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         print("딸~기 딸~기 👏👏👏 딸기")
         t.sleep(1)
         print("딸~기 딸~기 👏👏 딸~기")
@@ -72,7 +73,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         answer = input('지금이에요!!🫵: ')
         if(answer == '딸~기 딸~기 👏 딸기 딸~기'):
             pass
@@ -83,7 +84,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         print("딸~기 딸~기 👏👏 딸~기")
         t.sleep(1)
         print("딸~기 딸~기 👏👏👏 딸기")
@@ -99,7 +100,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         t.sleep(1)
         print("👏👏 딸기 딸기..?")
         t.sleep(1)
@@ -108,7 +109,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
         t.sleep(1)
         print("🍓 딸기게임이 종료되었습니다.👏")
         t.sleep(1)
-        return 0 # 성공 시 술마시기 pass!
+        return [friend_list[ran_dead]] # 성공 시 술마시기 pass!
     else:
         ### p != player(가상의 사용자)
         ran_choice_1 = r.randint(0,1)
@@ -130,7 +131,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         
         ran_choice_2 = r.randint(0,1)
         print("딸~기 딸~기 👏👏👏 딸기")
@@ -157,7 +158,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         
         ran_choice_3 = r.randint(0,1)
         print('지금이에요!!🫵: ')
@@ -172,7 +173,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         print("딸~기 딸~기 👏👏 딸~기")
         t.sleep(1)
         print("딸~기 딸~기 👏👏👏 딸기")
@@ -192,7 +193,7 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
             t.sleep(1)
             print("🍓 딸기게임이 종료되었습니다.👏")
             t.sleep(1)
-            return 1 # 실패 시 1잔
+            return [straw_player_object] # 실패 시 1잔
         t.sleep(1)
         print("👏👏 딸기 딸기..?")
         t.sleep(1)
@@ -201,5 +202,5 @@ def 딸기게임(straw_player, friend_list, is_friend=False):
         t.sleep(1)
         print("🍓 딸기게임이 종료되었습니다.👏")
         t.sleep(1)
-        return 0 # 성공 시 술마시기 pass!
+        return [friend_list[ran_dead]] # 성공 시 술마시기 pass!
         

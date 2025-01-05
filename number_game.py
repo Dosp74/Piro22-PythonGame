@@ -1,16 +1,8 @@
 import random
 import time
 
-'''
-   숫자맞추기(is_friend=False)
-   ├── 1-10 사이 랜덤 숫자 생성
-   ├── 최대 5번의 시도 기회
-   │   ├── 실제 플레이어: 직접 숫자 입력
-   │   └── AI 플레이어: 이전 결과 기반 추측
-   └── 결과 반환
-       ├── 성공: 0잔
-       └── 실패: 1잔
-'''
+# 현재 진행 중인 게임 세션을 추적하는 변수
+_current_game_session = None
 
 def number_game(players, is_real_player=False):
     """
@@ -19,66 +11,75 @@ def number_game(players, is_real_player=False):
         players (list): 참여하는 플레이어 목록
         is_real_player (bool): 실제 플레이어의 턴인지 여부
     Returns:
-        dict: 각 플레이어별 마셔야 하는 잔 수
+        list: 술을 마셔야 하는 플레이어 리스트
     """
+    global _current_game_session
     target = random.randint(1, 10)
-    result = {}  # 각 플레이어별 마셔야 하는 잔 수
+    current_player = players[0] if not is_real_player else players[1]  # 현재 플레이어
     
-    print("\n=== 숫자 맞추기 게임 ===")
-    print("1부터 10 사이의 숫자를 맞춰보세요!")
-    print("기회는 5번 있습니다.")
-    print("기회를 모두 사용하면 1잔을 마셔야 합니다!")
+    # 새로운 게임 세션인지 확인
+    if _current_game_session != id(players):
+        _current_game_session = id(players)
+        print('''
+    ███╗   ██╗██╗   ██╗███╗   ███╗██████╗ ███████╗██████╗      ██████╗  █████╗ ███╗   ███╗███████╗
+    ████╗  ██║██║   ██║████╗ ████║██╔══██╗██╔════╝██╔══██╗    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝
+    ██╔██╗ ██║██║   ██║██╔████╔██║██████╔╝█████╗  ██████╔╝    ██║  ███╗███████║██╔████╔██║█████╗  
+    ██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══██╗██╔══╝  ██╔══██╗    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  
+    ██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗██║  ██║    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗
+    ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
+        ''')
+        print("\n===================<🕹️  숫자 맞추기 게임>===================")
+        print("1부터 10 사이의 숫자를 맞춰보세요!")
+        print("기회는 5번 있습니다.")
+        print("기회를 모두 사용하면 1잔을 마셔야 합니다!")
+        print("========================================================")
     
-    for player in players:
-        # print(f"\n{player.name}의 차례!")
-        attempts = 0
-        max_attempts = 5
-        previous_guesses = []
-        
-        while attempts < max_attempts:
-            # if player != players[0]:  # AI 플레이어
-            if is_real_player == True:
-                time.sleep(1)
-                if not previous_guesses:
-                    guess = random.randint(1, 10)
-                else:
-                    min_val = max([g for g, r in previous_guesses if r == "Up"] + [1])
-                    max_val = min([g for g, r in previous_guesses if r == "Down"] + [10])
-                    guess = random.randint(min_val, max_val)
-                print(f"\n{attempts + 1}번째 시도 - ", end="")
-                time.sleep(0.5)
-                print(f"{guess}!")
-            else:  # 실제 플레이어
-                try:
-                    guess = int(input(f"\n{attempts + 1}번째 시도 - 숫자를 입력하세요: "))
-                    if not 1 <= guess <= 10:
-                        print("1부터 10 사이의 숫자를 입력해주세요!")
-                        continue
-                except ValueError:
-                    print("올바른 숫자를 입력해주세요!")
-                    continue
-            
-            attempts += 1
-            
-            if guess == target:
-                print(f"정답입니다! {attempts}번 만에 맞추셨네요!")
-                # result[player] = 0
-                return 0
-                break
-            elif guess < target:
-                result = "Up"
-                print("Up! 더 큰 숫자입니다.")
+    attempts = 0
+    max_attempts = 5
+    previous_guesses = []
+    
+    while attempts < max_attempts:
+        if is_real_player:  # AI 플레이어
+            time.sleep(1)
+            if not previous_guesses:
+                guess = random.randint(1, 10)
             else:
-                result = "Down"
-                print("Down! 더 작은 숫자입니다.")
-                
-            if player != players[0]:
-                previous_guesses.append((guess, result))
-                
-            if attempts == max_attempts:
-                print(f"\n기회를 모두 소진했습니다. 정답은 {target}였습니다!")
-                # result[player] = 1
-                return 1
+                min_val = max([g for g, r in previous_guesses if r == "Up"] + [1])
+                max_val = min([g for g, r in previous_guesses if r == "Down"] + [10])
+                guess = random.randint(min_val, max_val)
+            print(f"\n{attempts + 1}번째 시도 - ", end="")
+            time.sleep(0.5)
+            print(f"{guess}!")
+        else:  # 실제 플레이어
+            try:
+                guess = int(input(f"\n{attempts + 1}번째 시도 - 숫자를 입력하세요: "))
+                if not 1 <= guess <= 10:
+                    print("1부터 10 사이의 숫자를 입력해주세요!")
+                    continue
+            except ValueError:
+                print("올바른 숫자를 입력해주세요!")
+                continue
+        
+        attempts += 1
+        
+        if guess == target:
+            print(f"\n🎉 정답입니다! {attempts}번 만에 맞추셨네요!")
+            print(f"🎊 {current_player.name}님이 성공적으로 게임을 완료했습니다!")
+            return []  # 성공: 아무도 마시지 않음
+        
+        elif guess < target:
+            result = "Up"
+            print("⬆️ Up! 더 큰 숫자입니다.")
+        else:
+            result = "Down"
+            print("⬇️ Down! 더 작은 숫자입니다.")
+            
+        if is_real_player:
+            previous_guesses.append((guess, result))
+            
+        if attempts == max_attempts:
+            print(f"\n❌ 기회를 모두 소진했습니다. 정답은 {target}였습니다!")
+            print(f"🍺 벌칙: {current_player.name}(이)가 술 1잔을 마셔야 합니다!")
+            return [current_player]  # 실패: 현재 플레이어만 마심
     
-    # return result[player]
-    return 0
+    return []  # 예외 상황 처리
