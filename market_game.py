@@ -1,12 +1,7 @@
-# import game
 import random
 import time
 
-name = input("당신의 이름을 입력하세요: ")
-
-players = ["서정", "종서", "주영"] # 예시
-
-def 시장에가면(players):
+def 시장에가면(name, players, is_human):
     itemList = ["사과", "고등어", "소주", "맥주", "문어", "갈치", "휴대폰", "TV", 
                 "노트북", "컵", "휴지", "물티슈", "바나나", "커피", "콜라", "초콜릿", 
                 "우유", "빵", "계란", "치킨", "피자", "햄버거", "케이크", "컵라면", 
@@ -32,8 +27,9 @@ def 시장에가면(players):
     gameItemList = []
     while True:
         for player in players:
-            print(player + " : 시장에 가면~ ", end="")
-            if player == name: # game.Player.name으로 수정?
+            print(player.name + " : 시장에 가면~ ", end="")
+            if is_human: # is_human이 참일 때, 즉 나일 때
+                is_human = False
                 time.sleep(1)
                 for i in range(count):
                     gameItemListLength = len(gameItemList)
@@ -48,9 +44,10 @@ def 시장에가면(players):
                     else:
                         time.sleep(1)
                         print("아~ 순서가 틀렸어요😂")
-                        return {player: 1}
+                        return {player.name: 1}
                 count += 1
             else:
+                is_human = True
                 time.sleep(1)
                 for i in range(count): # 현재 로직: 봇은 무조건 게임 통과
                     gameItemListLength = len(gameItemList)
@@ -68,5 +65,3 @@ def 시장에가면(players):
                         #time.sleep(1)
                 count += 1
             print("\n")
-
-시장에가면(players) # end=""로 가로 출력 시 출력 후 딜레이, 출력 후 딜레이 이런 식으로 생동감 있게 구현하려고 했으나 안 됨(뭐가 문제일까?)

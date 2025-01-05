@@ -140,7 +140,7 @@ def gamestart():
                     elif choice == 2:
                         result = 가위바위보하나빼기(p != player)
                     elif choice == 3:
-                        result = 시장에가면(p != player)
+                        result = 시장에가면(p.name, all_players, p != player)
                     elif choice == 4:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = 딸기게임(p.name, friend_list, p != player)
