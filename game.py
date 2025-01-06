@@ -4,7 +4,7 @@ from number_game import number_game
 from rps_game import rps_game
 from market_game import market_game
 from strawberry_game import strawberry_game
-from like_game import game_like
+from like_game2 import game_like
 import time
 
 global games
@@ -120,10 +120,12 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = strawberry_game(p, friend_list, p != player)
                     elif choice == 5:
-                        result = game_like(p.name, player.name, all_players)
+                        friend_list = [fr for fr in all_players if fr!=p]
+                        result = game_like(player, all_players,p)
                     
                     if isinstance(result, list):
                         drink_players.extend(result)
+                 
                     else: 
                         if result > 0:
                             drink_players.append(p)

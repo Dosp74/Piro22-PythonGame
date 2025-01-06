@@ -6,7 +6,7 @@ _game_session_id = None
 
 def game_like(current_player_name: str, real_player_name: str, all_players: list) -> list:
     global _game_session_id
-    
+    rejection_count = 0
     # 현재 게임 세션 확인 (all_players 리스트의 ID를 사용)
     current_session = id(all_players)
     
@@ -35,7 +35,7 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
 
     # 현재 플레이어 찾기 (Player 객체만 필터링)
     current_player = next(p for p in all_players if hasattr(p, 'name') and p.name == current_player_name)
-    rejection_count = 0
+   
 
     # 현재 플레이어가 실제 플레이어인지 확인
     is_real_player = current_player_name == real_player_name
@@ -86,14 +86,19 @@ def game_like(current_player_name: str, real_player_name: str, all_players: list
     print(f"{selected_player.name}: {reaction}")
 
     if reaction == "칵, 퉤!":
-        rejection_count += 1
+        rejection_count = rejection_count +1
         print(f"\n💔 {selected_player.name}(이)가 {current_player.name}의 고백을 거절했습니다!")
         if rejection_count >= 3:
-            print(f"🍺 3번 연속 거절! {current_player.name}(이)가 술을 마셔야 합니다!")
+            print(f"🍺 3번 거절! {current_player.name}(이)가 술을 마셔야 합니다!")
             return [current_player]
         else:
-            print(f"이번이 {rejection_count}번째 거절입니다.")
-            return []
+            print(f"이번이 {rejection_count}번째 거절입니다.")  
+            return 0       
     else:
         print(f"\n💕 {current_player.name}와(과) {selected_player.name}의 짝짓기 성공! 아무도 마시지 않습니다~")
-        return []
+        return 0 
+    
+    if current_session==len(all_players):
+        if rejection_count<3:
+            print("게임이 끝났음에도 루저가 정해지지 않았군요~! 게임을 제안한 사람이 마시세요")
+            return [current_player_name]
