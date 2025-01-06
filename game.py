@@ -165,6 +165,10 @@ def gamestart():
                     next_players = [p for p in all_players if p.drinks == max_drinks]
                     current_player = random.choice(next_players)
                     print(f"\n👉 아무도 마시지 않아 가장 많이 마신 {current_player.name}님이 다음 게임을 선택합니다!")
+                    # 마신 사람부터 시작하도록 배열 재정렬
+                    start_index = all_players.index(current_player)
+                    all_players = all_players[start_index:] + all_players[:start_index]
+                    continue  # 메인 게임 루프 계속
                 
             else:
                 print("잘못된 번호입니다. 다시 선택하세요.")
