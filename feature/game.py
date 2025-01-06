@@ -105,11 +105,12 @@ def gamestart():
             if 1 <= choice <= len(games):
                 print(f"\n=== {games[choice-1]} 시작! ===")
                 drink_players = [] 
-                
+                flag=0
+
                 for p in all_players:
                     print(f"\n{p.name}의 차례!")
                     if choice == 1:
-                        result = number_game(p, p == player)
+                        result = number_game(p,flag, p == player)
                     elif choice == 2:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = rps_game(p, friend_list, p != player)
@@ -122,6 +123,7 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = game_like(player, all_players,p)
                     
+                    flag=1
                     if isinstance(result, list):
                         drink_players.extend(result)
                  

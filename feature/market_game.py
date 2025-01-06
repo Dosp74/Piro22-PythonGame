@@ -47,17 +47,17 @@ def market_game(me, name, players):
     count = 1
     gameItemList = []
     randomCeil = random.randint(13, 18)
-    start_index = next((i for i, player in enumerate(players) if player.name == name), 0)
-    players = players[start_index:] + players[:start_index]
+    # start_index = next((i for i, player in enumerate(players) if player.name == name), 0)
+    # players = players[start_index:] + players[:start_index]
     randomCount = random.randint(8, 12)
     while True:
         for player in players:
-            if player.name == me:
+            if player.name == name:
                 print(player.name + " : 시장에 가면~ ", end="")
-                time.sleep(1)
+                # time.sleep(1)
+                myItem = input("")
                 for i in range(count):
                     gameItemListLength = len(gameItemList)
-                    myItem = input("")
                     if i >= gameItemListLength:
                         gameItemList.append(myItem)
                         print(gameItemList[i] + "도 있고 ~ ", end="")
