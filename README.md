@@ -179,7 +179,7 @@
 - 힌트 제공: Up/Down
 
 ### **rps_game.py**
-####`rps_game(current_player,available_names, is_friend)`
+#### `rps_game(current_player,available_names, is_friend)`
 가위바위보에서 승자를 제외한 패자들이 벌주를 마시는 게임
 - 매개변수:
   - `current_player`: 현재 플레이어를 클래스 형식으로 받음
