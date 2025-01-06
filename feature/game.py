@@ -1,11 +1,10 @@
 import random
 import time
-from number_game import number_game
-from rps_game import rps_game
-from market_game import market_game
-from strawberry_game import strawberry_game
-from like_game2 import game_like
-import time
+from feature.number_game import number_game
+from feature.rps_game import rps_game
+from feature.market_game import market_game
+from feature.strawberry_game import strawberry_game
+from feature.like_game2 import game_like
 
 global games
 global players_name
