@@ -59,6 +59,9 @@ def market_game(me, name, players):
                     gameItemListLength = len(gameItemList)
                     myItem = input("")
                     if i >= gameItemListLength:
+                        if myItem in gameItemList:
+                            print("이미 있는 물건이에요😂")
+                            return [player]
                         gameItemList.append(myItem)
                         print(gameItemList[i] + "도 있고 ~ ", end="")
                     elif myItem == gameItemList[i]:
@@ -68,7 +71,6 @@ def market_game(me, name, players):
                         print("\n아~ 순서가 틀렸어요😂")
                         return [player]
                 count += 1
-                print()
             else:
                 print(f"\n{player.name} : 시장에 가면~ ", end="")
                 time.sleep(1)
@@ -97,4 +99,4 @@ def market_game(me, name, players):
                     if item == gameItemList[i]:
                         print(gameItemList[i] + "도 있고 ~ ", end="")
                 count += 1
-                print()
+            print("\n")
