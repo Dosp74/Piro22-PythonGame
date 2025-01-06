@@ -53,7 +53,7 @@ def market_game(me, name, players):
     while True:
         for player in players:
             if player.name == me:
-                print(player.name + " : 시장에 가면~ ", end="")
+                print(f"\n{player.name} : 시장에 가면~ ", end="")
                 time.sleep(1)
                 for i in range(count):
                     gameItemListLength = len(gameItemList)
@@ -61,19 +61,18 @@ def market_game(me, name, players):
                     if i >= gameItemListLength:
                         gameItemList.append(myItem)
                         print(gameItemList[i] + "도 있고 ~ ", end="")
-                        #time.sleep(1)
                     elif myItem == gameItemList[i]:
                         print(gameItemList[i] + "도 있고 ~ ", end="")
-                        #time.sleep(1)
                     else:
                         time.sleep(1)
-                        print("아~ 순서가 틀렸어요😂")
+                        print("\n아~ 순서가 틀렸어요😂")
                         return [player]
                 count += 1
+                print()
             else:
-                print(player.name + " : 시장에 가면~ ", end="")
+                print(f"\n{player.name} : 시장에 가면~ ", end="")
                 time.sleep(1)
-                for i in range(count): # 현재 로직: 봇은 무조건 게임 통과
+                for i in range(count):
                     gameItemListLength = len(gameItemList)
                     if randomCount <= count:
                         print("어...")
@@ -93,11 +92,9 @@ def market_game(me, name, players):
                             item = random.choice(itemList)
                         gameItemList.append(item)
                         print(gameItemList[i] + "도 있고 ~ ", end="")
-                        #time.sleep(1)
                         continue
                     item = gameItemList[i]
                     if item == gameItemList[i]:
                         print(gameItemList[i] + "도 있고 ~ ", end="")
-                        #time.sleep(1)
                 count += 1
-            print("\n")
+                print()
