@@ -55,6 +55,7 @@ def game_like(player, all_players, current_player):
             reaction = random.choice(["나도 좋아!", "칵, 퉤!"])
             if reaction == "칵, 퉤!":
                 rejection_count+=1
+                print(reaction)
                 print(f"\n💔 {selected_player.name}(이)가 {i.name}의 고백을 거절했습니다!")
                 if rejection_count >= 3:
                     print(f"🍺 3번 거절! {i}(이)가 술을 마셔야 합니다!")
@@ -62,6 +63,7 @@ def game_like(player, all_players, current_player):
                 else:
                     print(f"이번이 {rejection_count}번째 거절입니다.")              
             else:
+                print(reaction)
                 print(f"\n💕 {i.name}와(과) {selected_player.name}의 짝짓기 성공! 아무도 마시지 않습니다~")
                 
 
