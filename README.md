@@ -122,13 +122,14 @@
 
 ### **rps_game.py**
 - **함수**
-  - `가위바위보하나빼기(players, is_human) -> dict`
+  - `가위바위보하나빼기(current_player,available_names, is_friend)`
     - **설명**: 가위바위보에서 승자를 제외한 패자들이 벌주를 마시는 게임
     - 매개변수:
-      - `players (list[Player])`: 참가자 리스트
-      - `is_human (bool)`: 현재 플레이어가 실제 사용자 여부
+      - `current_player`: 현재 플레이어를 클래스 형식으로 받음
+      - `available_names`: 현재 플레이어 제외 다리에 있는 사람 명단 (지목가능한 명단)
+      - `is_friend`: 현재 플레이어가 실제 사용자 여부
     - 반환값:
-      - `{Player: int}`: 패자와 마셔야 할 잔 수
+      -`[Player]` or`int`: 현재플레이어만 루저이면 마셔야할 잔 수를 int로 반환, 이외의 경우 마셔야할 플레이어 리스트 반환
 
 
 ### **market_game.py**
