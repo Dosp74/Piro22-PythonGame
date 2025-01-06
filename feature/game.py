@@ -115,7 +115,7 @@ def gamestart():
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = rps_game(p, friend_list, p != player)
                     elif choice == 3:
-                        result = market_game(p.name, player.name, all_players)
+                        result = market_game(player.name, p.name, all_players)
                     elif choice == 4:
                         friend_list = [fr for fr in all_players if fr!=p]
                         result = strawberry_game(p, friend_list, p != player)
